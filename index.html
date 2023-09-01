@@ -1,86 +1,19 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Expense Tracker</title>
-    <link rel="stylesheet" href="main.css" />
-  </head>
-  <body>
-    <h2>Track your Expenses!</h2>
+<body>
 
-    <form>
-      <label for="list">Items:</label><br />
-      <input type="text" id="list" name="list" /><br />
-      <label for="price">Price:</label><br />
-      <input type="text" id="price" name="price" /><br />
-      <input type="button" id="addButton" onclick="AddRows();" value="Add" />
-    </form>
+<h2>HTML Forms</h2>
 
-    <div>
-      <table class="show" id="expenseTable">
-        <tr>
-          <th>Items</th>
-          <th>Price</th>
-        </tr>
-        <!-- Empty row for the total -->
-        <tr>
-          <td>Total</td>
-          <td id="totalPrice">0</td>
-        </tr>
-      </table>
-      <button id="submitButton">Submit</button>
-    </div>
+<form action="https://script.google.com/macros/s/AKfycbzohDpCvJfpJvBXtCmQQwioUbmN5SwbtHp1Wi6rS2tCNkgW8O_1iesQJP8DA7-o0zzCgQ/exec?gid=0
+" method="get">
+  <label for="list">Items:</label><br>
+  <input type="text" id="list" name="list"><br>
+  <label for="price">Price:</label><br>
+  <input type="text" id="price" name="price"><br>
+  <input type="submit" value="Submit">
+</form> 
 
-    <script>
-      var list1 = [];
-      var list2 = [];
-      var n = 1;
-      var x = 0;
+<p>If you click the "Submit" button, the form-data will be sent to a page called "/action_page.php".</p>
 
-      function AddRows() {
-        var addRow = document.getElementById("expenseTable");
-        var newRow = addRow.insertRow(n);
-
-        list1[x] = document.getElementById("list").value;
-        list2[x] = parseFloat(document.getElementById("price").value); // Convert price to a number
-
-        var cell1 = newRow.insertCell(0);
-        var cell2 = newRow.insertCell(1);
-
-        cell1.innerHTML = list1[x];
-        cell2.innerHTML = list2[x].toFixed(2); // Display price with 2 decimal places
-
-        // Update the total
-        var totalPriceCell = document.getElementById("totalPrice");
-        var currentTotal = parseFloat(totalPriceCell.textContent) || 0;
-        currentTotal += list2[x];
-        totalPriceCell.textContent = currentTotal.toFixed(2);
-
-        ++n;
-        ++x;
-      }
-
-      document.getElementById("submitButton").addEventListener("click", function () {
-        // Collect table data and send it to Google Sheets
-        var tableData = {
-          items: list1,
-          prices: list2,
-        };
-
-        fetch("https://script.google.com/macros/s/AKfycbzohDpCvJfpJvBXtCmQQwioUbmN5SwbtHp1Wi6rS2tCNkgW8O_1iesQJP8DA7-o0zzCgQ/exec?gid=0", {
-          method: "post", // Use POST method to send data
-          body: JSON.stringify(tableData),
-        })
-          .then(function (response) {
-            if (response.ok) {
-              alert("Data sent successfully!");
-            } else {
-              alert("Error sending data. Please try again.");
-            }
-          })
-          .catch(function (error) {
-            console.error("Error:", error);
-          });
-      });
-    </script>
-  </body>
+</body>
 </html>

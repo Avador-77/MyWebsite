@@ -49,8 +49,11 @@
         }
     };
 
-    // Make the HTTP request to the Google Sheets webhook API
-    fetch("https://script.google.com/macros/s/AKfycbzohDpCvJfpJvBXtCmQQwioUbmN5SwbtHp1Wi6rS2tCNkgW8O_1iesQJP8DA7-o0zzCgQ/exec?gid=0", requestData)
+    // Replace this URL with your actual Google Sheets API endpoint
+    var googleSheetsAPIEndpoint = "https://script.google.com/macros/s/AKfycbzohDpCvJfpJvBXtCmQQwioUbmN5SwbtHp1Wi6rS2tCNkgW8O_1iesQJP8DA7-o0zzCgQ/exec?gid=0";
+
+    // Make the HTTP request to the Google Sheets API
+    fetch(googleSheetsAPIEndpoint, requestData)
         .then(function (response) {
             if (response.ok) {
                 alert("Data submitted successfully!");
@@ -63,6 +66,7 @@
             console.error("Error:", error);
         });
 }
+
 
     </script>
 </head>

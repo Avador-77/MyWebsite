@@ -67,7 +67,7 @@
         };
 
         fetch("https://script.google.com/macros/s/AKfycbzohDpCvJfpJvBXtCmQQwioUbmN5SwbtHp1Wi6rS2tCNkgW8O_1iesQJP8DA7-o0zzCgQ/exec?gid=0", {
-          method: "POST", // Use POST method to send data
+          method: "post", // Use POST method to send data
           body: JSON.stringify(tableData),
         })
           .then(function (response) {

@@ -1,20 +1,67 @@
 <!DOCTYPE html>
 <html>
-<body>
+  <head>
+    <title>Expense Tracker</title>
+    <link rel="stylesheet" href="main.css" />
+  </head>
+  <body>
+    <h2>Track your Expenses!</h2>
 
-<h2>HTML Forms</h2>
+    <form>
+      <label for="list">Items:</label><br />
+      <input type="text" id="list" name="list" /><br />
+      <label for="price">Price:</label><br />
+      <input type="text" id="price" name="price" /><br />
+      <input type="button" id="button" onclick="AddRows();" value="Add" />
+    </form>
 
-<form action="https://script.google.com/macros/s/AKfycbzohDpCvJfpJvBXtCmQQwioUbmN5SwbtHp1Wi6rS2tCNkgW8O_1iesQJP8DA7-o0zzCgQ/exec?gid=0
-" method="get">
-  <label for="list">Items:</label><br>
-  <input type="text" id="list" name="list"><br>
-  <label for="price">Price:</label><br>
-  <input type="text" id="price" name="price"><br>
-  <input type="submit" value="Submit">
-</form> 
+    <div>
+      <form
+        action="https://script.google.com/macros/s/AKfycbzohDpCvJfpJvBXtCmQQwioUbmN5SwbtHp1Wi6rS2tCNkgW8O_1iesQJP8DA7-o0zzCgQ/exec?gid=0"
+        method="get"
+      >
+        <table class="show" id="expenseTable">
+          <tr>
+            <th>Items</th>
+            <th>Price</th>
+          </tr>
+          <!-- Empty row for the total -->
+          <tr>
+            <td>Total</td>
+            <td id="totalPrice">0</td>
+          </tr>
+        </table>
+        <input type="button" id="button" value="Submit" />
+      </form>
+    </div>
+    <script>
+      var list1 = [];
+      var list2 = [];
+      var n = 1;
+      var x = 0;
 
-<p>If you click the "Submit" button, the form-data will be sent to a page called "/action_page.php".</p>
+      function AddRows() {
+        var addRow = document.getElementById("expenseTable");
+        var newRow = addRow.insertRow(n);
 
-</body>
+        list1[x] = document.getElementById("list").value;
+        list2[x] = parseFloat(document.getElementById("price").value); // Convert price to a number
+
+        var cell1 = newRow.insertCell(0);
+        var cell2 = newRow.insertCell(1);
+
+        cell1.innerHTML = list1[x];
+        cell2.innerHTML = list2[x].toFixed(2); // Display price with 2 decimal places
+
+        // Update the total
+        var totalPriceCell = document.getElementById("totalPrice");
+        var currentTotal = parseFloat(totalPriceCell.textContent) || 0;
+        currentTotal += list2[x];
+        totalPriceCell.textContent = currentTotal.toFixed(2);
+
+        ++n;
+        ++x;
+      }
+    </script>
+  </body>
 </html>
-

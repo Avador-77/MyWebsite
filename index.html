@@ -17,6 +17,14 @@
             }
         }
 
+        // Function to clear the "Today's Shopping" table
+        function clearShoppingTable() {
+            var table = document.getElementById("shoppingTable");
+            while (table.rows.length > 1) {
+                table.deleteRow(1);
+            }
+        }
+
         // Function to submit the data to Google Sheets
         function submitToGoogleSheet() {
     // Collect data from the "Today's Shopping" table
@@ -79,6 +87,7 @@
 </table>
 
 <button onclick="addToShoppingList()">Add to Shopping List</button>
+<button onclick="clearShoppingTable()">Clear</button>
 <button onclick="submitToGoogleSheet()">Submit to Google Sheet</button>
 
 <p>If you click the "Add to Shopping List" button, the data will be added to the table above.

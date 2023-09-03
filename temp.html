@@ -6,15 +6,6 @@
     <title>Expense Tracker</title>
     <!-- External CSS linkage -->
     <link rel="stylesheet" href="style.css" />
-
-    <!-- Internal CSS linkage -->
-    <!-- <style>
-      h2{
-
-        color: limegreen;
-
-      }
-    </style> -->
   </head>
   <body>
     <h2>{Track Your Expen$e$}</h2>
@@ -27,7 +18,6 @@
         <label for="price">Price:</label><br />
         <input type="text" id="price1" name="price" required /><br />
         <button type="button" onclick="Insert()">Add</button>
-        <!-- <input type="submit" value="Submit" /> -->
       </form>
     </fieldset>
     <br />
@@ -43,15 +33,13 @@
         </thead>
         <tbody id="tbl"></tbody>
       </table>
+      <button type="button" onclick="addDataToForm()">Add to Form</button>
       <button type="button" onclick="clearTable()">Clear Table</button>
     </fieldset>
-
-    <!-- Existing code (up to the "Today's List" table) remains the same -->
-
-    <!-- Add a new form under "Today's List" table -->
+    <br>
+    <br>
     <form
-      action="https://script.google.com/macros/s/AKfycbzohDpCvJfpJvBXtCmQQwioUbmN5SwbtHp1Wi6rS2tCNkgW8O_1iesQJP8DA7-o0zzCgQ/exec?gid=0
-    "
+      action="https://script.google.com/macros/s/AKfycbzohDpCvJfpJvBXtCmQQwioUbmN5SwbtHp1Wi6rS2tCNkgW8O_1iesQJP8DA7-o0zzCgQ/exec?gid=0"
       method="get"
     >
       <fieldset style="width: 30%; margin: 0 auto">
@@ -76,28 +64,48 @@
       // Declare global variables to store running total and item list
       var runningTotal = 0;
       var itemList = "";
+
+      // Load the data from localStorage when the page loads
+      window.onload = function () {
+        if (localStorage.getItem("items")) {
+          itemList = localStorage.getItem("items");
+          runningTotal = parseFloat(localStorage.getItem("total"));
+          document.getElementById("tbl").innerHTML = localStorage.getItem(
+            "table"
+          );
+        }
+      };
+
       function Insert() {
         var items = document.getElementById("list1").value;
         var price = parseFloat(document.getElementById("price1").value);
 
         var table = `<tr>
                         <td>${items}</td>
-                        <td>${price}</td>
+                        <td>${price.toFixed(2)}</td>
                       </tr>`;
         document.getElementById("tbl").innerHTML += table;
-        // Populate the new form with the latest data
 
         // Update running total and item list
         runningTotal += price;
         itemList += items + " ";
 
-        populateForm(itemList, runningTotal);
+        // Store the data in localStorage
+        localStorage.setItem("items", itemList);
+        localStorage.setItem("total", runningTotal);
+        localStorage.setItem("table", document.getElementById("tbl").innerHTML);
+
+        // Clear input fields under the "Purchased Items" section
         clearForm();
       }
 
-      function populateForm(items, price) {
-        document.getElementById("list").value = items.trim();
-        document.getElementById("price").value = price.toFixed(2);
+      function addDataToForm() {
+        var items = itemList.trim();
+        var price = runningTotal.toFixed(2);
+
+        // Populate the "Add Data from Today's List" form with the latest data
+        document.getElementById("list").value = items;
+        document.getElementById("price").value = price;
       }
 
       function clearForm() {
@@ -107,16 +115,20 @@
 
       function clearTable() {
         var tableBody = document.getElementById("tbl");
-        tableBody.innerHTML = ""; // This will remove all the child elements (rows) from the table body
-        runningTotal = 0; // Reset the running total
-        itemList = ""; // Reset the item list
+        tableBody.innerHTML = "";
+        runningTotal = 0;
+        itemList = "";
+
+        // Clear the data from localStorage
+        localStorage.removeItem("items");
+        localStorage.removeItem("total");
+        localStorage.removeItem("table");
       }
 
-      function clearFinalForm(){
+      function clearFinalForm() {
         document.getElementById("list").value = "";
         document.getElementById("price").value = "";
       }
-
     </script>
   </body>
 </html>

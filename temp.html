@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Expense Tracker</title>
+    <!-- External CSS linkage -->
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- Internal CSS linkage -->
+    <!-- <style>
+      h2{
+
+        color: limegreen;
+
+      }
+    </style> -->
+  </head>
+  <body>
+    <h2>{Track Your Expen$e$}</h2>
+
+    <fieldset style="width: 30%; margin: 0 auto">
+      <legend>Purchased Items</legend>
+      <form>
+        <label for="list">Items:</label><br />
+        <input type="text" id="list1" name="list" required /><br />
+        <label for="price">Price:</label><br />
+        <input type="text" id="price1" name="price" required /><br />
+        <button type="button" onclick="Insert()">Add</button>
+        <!-- <input type="submit" value="Submit" /> -->
+      </form>
+    </fieldset>
+    <br />
+    <br />
+    <fieldset style="width: 30%; margin: 0 auto">
+      <legend>Today's List</legend>
+      <table style="width: 100%" border="1">
+        <thead>
+          <tr>
+            <th>Items</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody id="tbl"></tbody>
+      </table>
+      <button type="button" onclick="clearTable()">Clear Table</button>
+    </fieldset>
+
+    <!-- Existing code (up to the "Today's List" table) remains the same -->
+
+    <!-- Add a new form under "Today's List" table -->
+    <form
+      action="https://script.google.com/macros/s/AKfycbzohDpCvJfpJvBXtCmQQwioUbmN5SwbtHp1Wi6rS2tCNkgW8O_1iesQJP8DA7-o0zzCgQ/exec?gid=0
+    "
+      method="get"
+    >
+      <fieldset style="width: 30%; margin: 0 auto">
+        <legend>Add Data from Today's List</legend>
+        <label for="formList">Items:</label><br />
+        <input type="text" id="list" name="list" /><br />
+        <label for="formPrice">Price:</label><br />
+        <input type="text" id="price" name="price" /><br />
+        <input type="submit" value="Submit" />
+        <button type="button" onclick="clearFinalForm()">Clear Table</button>
+      </fieldset>
+    </form>
+
+    <p>
+      <a
+        href="https://docs.google.com/spreadsheets/d/1VJpvn7nPzS6PyWqjkQV6NT2sMchZq2xhY7VrIv9Jwpc/edit#gid=645308936"
+        >View Transactions</a
+      >
+    </p>
+
+    <script>
+      // Declare global variables to store running total and item list
+      var runningTotal = 0;
+      var itemList = "";
+      function Insert() {
+        var items = document.getElementById("list1").value;
+        var price = parseFloat(document.getElementById("price1").value);
+
+        var table = `<tr>
+                        <td>${items}</td>
+                        <td>${price}</td>
+                      </tr>`;
+        document.getElementById("tbl").innerHTML += table;
+        // Populate the new form with the latest data
+
+        // Update running total and item list
+        runningTotal += price;
+        itemList += items + " ";
+
+        populateForm(itemList, runningTotal);
+        clearForm();
+      }
+
+      function populateForm(items, price) {
+        document.getElementById("list").value = items.trim();
+        document.getElementById("price").value = price.toFixed(2);
+      }
+
+      function clearForm() {
+        document.getElementById("list1").value = "";
+        document.getElementById("price1").value = "";
+      }
+
+      function clearTable() {
+        var tableBody = document.getElementById("tbl");
+        tableBody.innerHTML = ""; // This will remove all the child elements (rows) from the table body
+        runningTotal = 0; // Reset the running total
+        itemList = ""; // Reset the item list
+      }
+
+      function clearFinalForm(){
+        document.getElementById("list").value = "";
+        document.getElementById("price").value = "";
+      }
+
+    </script>
+  </body>
+</html>

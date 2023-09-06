@@ -124,7 +124,7 @@ h2{
 }
 
 .dynamic-row td{
-    font-family: 'Courier New', Courier, monospace;
+    font-family: sans-serif;
     color: white;
     text-align: center;
     padding: 5px;

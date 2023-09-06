@@ -7,132 +7,154 @@
     <!-- External CSS linkage -->
     <link rel="stylesheet" href="style.css" />
   </head>
+
   <body>
-    <h2>{Track Your Expen$e$}</h2>
+    <div id="main">
+      <div id="hMsg-id"><h2>{Track Your Expen$e$}</h2></div>
 
-    <fieldset style="width: 30%; margin: 0 auto">
-      <legend>Purchased Items</legend>
-      <form>
-        <label for="list">Items:</label><br />
-        <input type="text" id="list1" name="list" required /><br />
-        <label for="price">Price:</label><br />
-        <input type="text" id="price1" name="price" required /><br />
-        <button type="button" onclick="Insert()">Add</button>
-        <button type="button" onclick="clearForm()">Clear</button>
-
-      </form>
-    </fieldset>
-    <br />
-    <br />
-    <fieldset style="width: 30%; margin: 0 auto">
-      <legend>Today's List</legend>
-      <table style="width: 100%" border="1">
-        <thead>
-          <tr>
-            <th>Items</th>
-            <th>Price</th>
-          </tr>
-        </thead>
-        <tbody id="tbl"></tbody>
-      </table>
-      <button type="button" onclick="addDataToForm()">Add</button>
-      <button type="button" onclick="clearTable()">Clear</button>
-    </fieldset>
-    <br>
-    <br>
-    <form
-      action="https://script.google.com/macros/s/AKfycbzohDpCvJfpJvBXtCmQQwioUbmN5SwbtHp1Wi6rS2tCNkgW8O_1iesQJP8DA7-o0zzCgQ/exec?gid=0"
-      method="get"
-    >
-      <fieldset style="width: 30%; margin: 0 auto">
-        <legend>Add Data from Today's List</legend>
-        <label for="formList">Items:</label><br />
-        <input type="text" id="list" name="list" /><br />
-        <label for="formPrice">Price:</label><br />
-        <input type="text" id="price" name="price" /><br />
-        <input type="submit" value="Submit" />
-        <button type="button" onclick="clearFinalForm()">Clear Table</button>
+      <fieldset class="field-set" style="width: 30%; margin: 0 auto">
+        <legend class="headings">Purchased Items</legend>
+        <form>
+          <div class="field-item1">
+            <label for="list" id="items" class="field-heads">Items:</label>
+            <input type="text" id="list1" name="list" class="inp-field" /><br />
+          </div>
+          <div class="field-item2">
+            <label for="price" id="prc" class="field-heads">Price:</label>
+            <input
+              type="text"
+              id="price1"
+              name="price"
+              class="inp-field"
+              required
+            /><br />
+          </div>
+          <div class="buttons">
+            <button class="addButton" type="button" onclick="Insert()">Add</button>
+            <button class="clearButton" type="button" onclick="clearForm()">Clear</button>
+          </div>
+        </form>
       </fieldset>
-    </form>
-
-    <p>
-      <a
-        href="https://docs.google.com/spreadsheets/d/1VJpvn7nPzS6PyWqjkQV6NT2sMchZq2xhY7VrIv9Jwpc/edit#gid=645308936"
-        >View Transactions</a
+      <br />
+      <br />
+      <fieldset style="width: 30%; margin: 0 auto">
+        <legend class="headings">Today's List</legend>
+        <table style="width: 100%" border="1">
+          <thead>
+            <tr>
+              <th class="row-heads">ITEMS</th>
+              <th class="row-heads">PRICE</th>
+            </tr>
+          </thead>
+          <tbody id="tbl"></tbody>
+        </table>
+        <div class="middle">
+          <button id="midAddButton" type="button" onclick="addDataToForm()">Add</button>
+          <button id="midClearButton" type="button" onclick="clearTable()">Clear</button>
+        </div>
+      </fieldset>
+      <br />
+      <br />
+      <form
+        action="https://script.google.com/macros/s/AKfycbzohDpCvJfpJvBXtCmQQwioUbmN5SwbtHp1Wi6rS2tCNkgW8O_1iesQJP8DA7-o0zzCgQ/exec?gid=0"
+        method="get"
       >
-    </p>
+        <fieldset style="width: 30%; margin: 0 auto">
+          <legend class="headings">Final Data</legend>
+          <div class="field-item1">
+            <label for="formList" id="items" class="field-heads">Items:</label>
+            <input type="text" id="list" name="list" class="inp-field" /><br />
+          </div>
+          <div class="field-item2">
+            <label for="formPrice" id="prc" class="field-heads">Price:</label>
+            <input type="text" id="price" name="price" class="inp-field" /><br />
+          </div>
+          <div class="buttons">
+            <input class="addButton" type="submit" value="Submit" />
+            <button class="clearButton" type="button" onclick="clearFinalForm()">Clear</button>
+          </div>
+        </fieldset>
+      </form>
 
-    <script>
-      // Declare global variables to store running total and item list
-      var runningTotal = 0;
-      var itemList = "";
+      <p>
+        <a
+          href="https://docs.google.com/spreadsheets/d/1VJpvn7nPzS6PyWqjkQV6NT2sMchZq2xhY7VrIv9Jwpc/edit#gid=645308936"
+          >View Transactions</a
+        >
+      </p>
 
-      // Load the data from localStorage when the page loads
-      window.onload = function () {
-        if (localStorage.getItem("items")) {
-          itemList = localStorage.getItem("items");
-          runningTotal = parseFloat(localStorage.getItem("total"));
-          document.getElementById("tbl").innerHTML = localStorage.getItem(
-            "table"
-          );
-        }
-      };
+      <script>
+        // Declare global variables to store running total and item list
+        var runningTotal = 0;
+        var itemList = "";
 
-      function Insert() {
-        var items = document.getElementById("list1").value;
-        var price = parseFloat(document.getElementById("price1").value);
+        // Load the data from localStorage when the page loads
+        window.onload = function () {
+          if (localStorage.getItem("items")) {
+            itemList = localStorage.getItem("items");
+            runningTotal = parseFloat(localStorage.getItem("total"));
+            document.getElementById("tbl").innerHTML =
+              localStorage.getItem("table");
+          }
+        };
 
-        var table = `<tr>
+        function Insert() {
+          var items = document.getElementById("list1").value;
+          var price = parseFloat(document.getElementById("price1").value);
+
+          var table = `<tr>
                         <td>${items}</td>
                         <td>${price.toFixed(2)}</td>
                       </tr>`;
-        document.getElementById("tbl").innerHTML += table;
+          document.getElementById("tbl").innerHTML += table;
 
-        // Update running total and item list
-        runningTotal += price;
-        itemList += items + " ";
+          // Update running total and item list
+          runningTotal += price;
+          itemList += items + " ";
 
-        // Store the data in localStorage
-        localStorage.setItem("items", itemList);
-        localStorage.setItem("total", runningTotal);
-        localStorage.setItem("table", document.getElementById("tbl").innerHTML);
+          // Store the data in localStorage
+          localStorage.setItem("items", itemList);
+          localStorage.setItem("total", runningTotal);
+          localStorage.setItem(
+            "table",
+            document.getElementById("tbl").innerHTML
+          );
 
-        // Clear input fields under the "Purchased Items" section
-        clearForm();
-      }
+          // Clear input fields under the "Purchased Items" section
+          clearForm();
+        }
 
-      function addDataToForm() {
-        var items = itemList.trim();
-        var price = runningTotal.toFixed(2);
+        function addDataToForm() {
+          var items = itemList.trim();
+          var price = runningTotal.toFixed(2);
 
-        // Populate the "Add Data from Today's List" form with the latest data
-        document.getElementById("list").value = items;
-        document.getElementById("price").value = price;
-      }
+          // Populate the "Add Data from Today's List" form with the latest data
+          document.getElementById("list").value = items;
+          document.getElementById("price").value = price;
+        }
 
-      
+        function clearForm() {
+          document.getElementById("list1").value = "";
+          document.getElementById("price1").value = "";
+        }
 
-      function clearForm() {
-        document.getElementById("list1").value = "";
-        document.getElementById("price1").value = "";
-      }
+        function clearTable() {
+          var tableBody = document.getElementById("tbl");
+          tableBody.innerHTML = "";
+          runningTotal = 0;
+          itemList = "";
 
-      function clearTable() {
-        var tableBody = document.getElementById("tbl");
-        tableBody.innerHTML = "";
-        runningTotal = 0;
-        itemList = "";
+          // Clear the data from localStorage
+          localStorage.removeItem("items");
+          localStorage.removeItem("total");
+          localStorage.removeItem("table");
+        }
 
-        // Clear the data from localStorage
-        localStorage.removeItem("items");
-        localStorage.removeItem("total");
-        localStorage.removeItem("table");
-      }
-
-      function clearFinalForm() {
-        document.getElementById("list").value = "";
-        document.getElementById("price").value = "";
-      }
-    </script>
+        function clearFinalForm() {
+          document.getElementById("list").value = "";
+          document.getElementById("price").value = "";
+        }
+      </script>
+    </div>
   </body>
 </html>

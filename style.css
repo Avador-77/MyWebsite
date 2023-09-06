@@ -1,4 +1,124 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,body{
+    width: 100%;
+    height: 100%;
+}
+
 h2{
     color: limegreen;
     font-size: 50px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+#hMsg-id{
+    padding-top: 10px;
+    margin-bottom: 20px;
+}
+
+#main{
+    width: 100%;
+    height: 100%;
+    background-color: darkslategrey;
+}
+
+#prc{
+    margin-right: 7px;
+}
+
+.inp-field{
+    margin-left: 5px;
+}
+
+.headings{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: yellow;
+    font-size: 20px;
+    margin-bottom: 8px;
+    
+}
+
+.field-heads{
+    color: skyblue;
+    font-size: 18px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    
+
+}
+
+.field-item1{
+    margin-bottom: 6px;
+    margin-left: 6px;
+}
+
+.field-item2{
+    margin-bottom: 15px;
+    margin-left: 6px;
+}
+
+.buttons{
+    text-align: center;
+    
+}
+
+.addButton{
+    background-color: green;
+    color: white;
+    margin-right: 20px;
+    margin-bottom: 7px;
+    padding: 5px;
+    width: 60px;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+}
+
+.clearButton{
+    background-color: rgb(147, 41, 247);
+    color: white;
+    margin-right: 50px;
+    margin-bottom: 7px;
+    padding: 5px;
+    width: 60px;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+}
+
+#midAddButton{
+    background-color: rgb(171, 6, 6);
+    color: white;
+    margin-left: 80px;
+    margin-bottom: 5px;
+    margin-top: 15px;
+    padding: 5px;
+    width: 60px;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+}
+
+#midClearButton{
+    background-color: rgb(147, 41, 247);
+    color: white;
+    margin-left: 120px;
+    margin-bottom: 5px;
+    margin-top: 15px;
+    padding: 5px;
+    width: 60px;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+}
+
+.row-heads{
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: normal;
+    font-size: 18px;
+    padding: 6px;
 }
